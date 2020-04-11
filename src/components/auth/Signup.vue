@@ -14,6 +14,7 @@
         <label for="name">Alias</label>
         <input id="name" type="text" v-model="alias" />
       </div>
+      <p class="red-text center" v-if="feedback">{{ feedback }}</p>
       <div class="field center">
         <button class="btn deep-purple">Signup</button>
       </div>
@@ -22,18 +23,26 @@
 </template>
 
 <script>
+import slugify from 'slugify'
+
 export default {
   name: "Signup",
   data() {
     return {
       email: null,
       password: null,
-      alias: null
+      alias: null,
+      feedback: null
     };
   },
   methods: {
     signup(){
-      
+      if(!this.alias){
+          this.feedback = 'Please enter an alias'
+          return
+      }
+
+      this.feedback = null
     }
   }
 };

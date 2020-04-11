@@ -2,10 +2,14 @@
   <div class="navbar">
     <nav class="deep-purple darken-1">
       <div class="container">
-        <a href="" class="brand-logo left">GeoAuth</a>
+        <a href class="brand-logo left">GeoAuth</a>
         <ul class="right">
-            <li><a href=""></a>Signup</li>
-            <li><a href=""></a>Login</li>
+          <li>
+            <router-link :to="{ name: 'Signup' }">Signup</router-link>
+          </li>
+          <li>
+            <a href="">Login</a>
+          </li>
         </ul>
       </div>
     </nav>
@@ -22,5 +26,4 @@ export default {
 </script>
 
 <style>
-
 </style>

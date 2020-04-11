@@ -32,7 +32,8 @@ export default {
       email: null,
       password: null,
       alias: null,
-      feedback: null
+      feedback: null,
+      slug: null
     };
   },
   methods: {
@@ -43,6 +44,13 @@ export default {
       }
 
       this.feedback = null
+      this.slug = slugify(this.alias, {
+        replacement: "-",
+        remove: /[$*_+~.()'"!\-:@]/g,
+        lower: true
+      });
+
+      console.log(this.slug)
     }
   }
 };

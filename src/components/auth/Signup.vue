@@ -23,7 +23,8 @@
 </template>
 
 <script>
-import slugify from 'slugify'
+import db from "@/firebase/init";
+import slugify from "slugify";
 
 export default {
   name: "Signup",
@@ -37,34 +38,40 @@ export default {
     };
   },
   methods: {
-    signup(){
-      if(!this.alias){
-          this.feedback = 'Please enter an alias'
-          return
+    signup() {
+      if (!this.alias) {
+        this.feedback = "Please enter an alias";
+        return;
       }
 
-      this.feedback = null
+      this.feedback = null;
       this.slug = slugify(this.alias, {
         replacement: "-",
         remove: /[$*_+~.()'"!\-:@]/g,
         lower: true
       });
 
-      console.log(this.slug)
+      let ref = db.collection("users").doc(this.slug);
+      ref.get().then(doc => {
+        if (doc.exists) {
+          this.feedback = "This alias already exists";
+        }
+      });
+      console.log(this.slug);
     }
   }
 };
 </script>
 
 <style>
-.signup{
+.signup {
   max-width: 400px;
   margin-top: 60px;
 }
-.signup h2{
+.signup h2 {
   font-size: 2.4em;
 }
-.signup .field{
+.signup .field {
   margin-bottom: 16px;
 }
 </style>
